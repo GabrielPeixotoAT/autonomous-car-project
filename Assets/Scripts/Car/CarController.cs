@@ -6,8 +6,12 @@ public class CarController : MonoBehaviour
 {
     public GameObject[] wheels;
     public WheelCollider[] colliders;
+    public float speed, topSpeed, maneuveringSpeed;
+
+    Vector3 pos;
+    Quaternion rot;
     
-    float inputView;
+    public float inputView, inputView2;
 
     public float torque;
 
@@ -17,32 +21,69 @@ public class CarController : MonoBehaviour
     }
 
     void Update()
-    {
-        SetWheelsPosition();
-
+    {   
         inputView = Input.GetAxis("Vertical");
+        inputView2 = Input.GetAxis("Horizontal");
 
-        if(Input.GetKeyDown(KeyCode.W))
+        SetSpeed();
+
+        if (inputView != 0)
         {
-            FreeBrakeAll();
-            AccelerateMotor(0,1);
-            AccelerateMotor(2,3);
+            Forward();
         }
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            FreeBrakeAll();
-            AccelerateMotorReverse(0,1);
-            AccelerateMotor(2,3);
-        }
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            FreeBrakeAll();
-            AccelerateMotorReverse(2,3);
-            AccelerateMotor(0,1);
-        }
-        if (false)
+        else 
         {
             StopCar();
+        }
+
+        if (inputView2 > 0)
+        {
+            Turn(true);
+        }
+        else if (inputView2 < 0)
+        {
+            Turn(false);
+        }
+        else
+        {
+
+        }
+
+        SetWheelsPosition();
+    }
+
+    void Forward()
+    {
+        if (speed < topSpeed)
+        {
+            FreeBrakeAll();
+            AccelerateMotor(0,1);
+            AccelerateMotor(2,3);
+        }
+        else 
+        {
+            NoAccelerate(0,1);
+            NoAccelerate(2,3);
+        }
+    }
+
+    void Turn(bool left)
+    {
+        FreeBrakeAll();
+
+        if (left)
+        {
+            colliders[0].motorTorque = torque * (-1);
+            colliders[1].motorTorque = torque * (-1);
+            colliders[2].motorTorque = torque;
+            colliders[3].motorTorque = torque;
+        }
+        else
+        {
+            colliders[0].motorTorque = torque;
+            colliders[1].motorTorque = torque;
+            colliders[2].motorTorque = torque * (-1);
+            colliders[3].motorTorque = torque * (-1);
         }
     }
 
@@ -50,14 +91,26 @@ public class CarController : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            colliders[i].brakeTorque = torque;
+            colliders[i].brakeTorque = torque * 2;
         }
+    }
+
+    void SetSpeed()
+    {
+        speed = 1.57f * colliders[0].rpm;
+        speed = Mathf.Abs(speed);
     }
 
     void AccelerateMotor(int wheel1, int wheel2)
     {
-        colliders[wheel1].motorTorque = torque * (-1);
-        colliders[wheel2].motorTorque = torque * (-1);
+        colliders[wheel1].motorTorque = torque * (-1) * inputView;
+        colliders[wheel2].motorTorque = torque * (-1) * inputView;
+    }
+
+    void NoAccelerate(int wheel1, int wheel2)
+    {
+        colliders[wheel1].motorTorque = 0;
+        colliders[wheel2].motorTorque = 0;
     }
 
     void AccelerateMotorReverse(int wheel1, int wheel2)
@@ -91,8 +144,9 @@ public class CarController : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            wheels[i].transform.position = colliders[i].transform.position;
-            wheels[i].transform.rotation = colliders[i].transform.rotation;
+            colliders[i].GetWorldPose(out pos, out rot);
+            wheels[i].transform.position = pos;
+            wheels[i].transform.rotation = rot;
         }
     }
 }
