@@ -1,0 +1,261 @@
+fileFormatVersion: 2
+guid: 2b1cf1af59362151094cdb679430fc86
+ModelImporter:
+  serializedVersion: 20300
+  internalIDToNameTable:
+  - first:
+      74: -4147985573255772246
+    second: caryer|caryer.002Action
+  - first:
+      74: 6754336535018738605
+    second: caryer|platformAction
+  - first:
+      74: 6955928260740782035
+    second: caryer|Shader NodetreeAction.001
+  - first:
+      74: 2528769905556234306
+    second: platform|caryer.002Action
+  - first:
+      74: 5037752887556206860
+    second: platform|platformAction
+  - first:
+      74: 5582435208839863821
+    second: platform|Shader NodetreeAction.001
+  - first:
+      74: -7230859246816786229
+    second: caryer.001|caryer.002Action
+  - first:
+      74: 4829868007830408737
+    second: caryer.001|platformAction
+  - first:
+      74: 7558949648913731689
+    second: caryer.001|Shader NodetreeAction.001
+  - first:
+      74: -1665248224543932613
+    second: caryer.002|caryer.002Action
+  - first:
+      74: -5767140570369314719
+    second: caryer.002|platformAction
+  - first:
+      74: -1463283949997498060
+    second: caryer.002|Shader NodetreeAction.001
+  - first:
+      74: -1030702628471621915
+    second: caryer.003|caryer.002Action
+  - first:
+      74: -3083135746038026377
+    second: caryer.003|platformAction
+  - first:
+      74: -4497313044666510349
+    second: caryer.003|Shader NodetreeAction.001
+  - first:
+      74: -3278405340387290178
+    second: caryer.004|caryer.002Action
+  - first:
+      74: -4683454922075009599
+    second: caryer.004|platformAction
+  - first:
+      74: 3033344661350909010
+    second: caryer.004|Shader NodetreeAction.001
+  - first:
+      74: -8916171184136993792
+    second: caryer.005|caryer.002Action
+  - first:
+      74: -6084745003806954644
+    second: caryer.005|platformAction
+  - first:
+      74: -2602333864336171296
+    second: caryer.005|Shader NodetreeAction.001
+  - first:
+      74: 695856682110639980
+    second: caryer.006|caryer.002Action
+  - first:
+      74: -6880566936745424371
+    second: caryer.006|platformAction
+  - first:
+      74: 8219095520657852381
+    second: caryer.006|Shader NodetreeAction.001
+  - first:
+      74: -5947216979342311974
+    second: caryer.007|caryer.002Action
+  - first:
+      74: 4308231416965017412
+    second: caryer.007|platformAction
+  - first:
+      74: 3462564398052197251
+    second: caryer.007|Shader NodetreeAction.001
+  - first:
+      74: -260627011239693770
+    second: caryer.008|caryer.002Action
+  - first:
+      74: -2950389444052534338
+    second: caryer.008|platformAction
+  - first:
+      74: -6323896818728333741
+    second: caryer.008|Shader NodetreeAction.001
+  - first:
+      74: 8983792598298233377
+    second: caryer.009|caryer.002Action
+  - first:
+      74: -1978552411313252807
+    second: caryer.009|platformAction
+  - first:
+      74: 3762291318456262071
+    second: caryer.009|Shader NodetreeAction.001
+  - first:
+      74: -1294405659853852685
+    second: caryer.010|caryer.002Action
+  - first:
+      74: 1177810493602186635
+    second: caryer.010|platformAction
+  - first:
+      74: 5093438480466484886
+    second: caryer.010|Shader NodetreeAction.001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 416d2ef5083be32bb83b5dd907e74340, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arrowLight
+    second: {fileID: 2100000, guid: 53d701020eed67552a621bb9466c7df2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackSteel.002
+    second: {fileID: 2100000, guid: da6103636e1d75551b916c8c2d34a205, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chrome
+    second: {fileID: 2100000, guid: af68cb1690523ffe19ff74afee8d7a4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: b65511a02e75dc3a3812d182e9c63dd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light
+    second: {fileID: 2100000, guid: fb7172a93c9f8915c90240e2912201f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rubber
+    second: {fileID: 2100000, guid: c5b389790e1e800c3b9d2e0bda8aecc2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: steel
+    second: {fileID: 2100000, guid: 9c54151e11f47bf1c8cbedea1ad8f6bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: steel 2
+    second: {fileID: 2100000, guid: 51086047d72a9eb8e9b2dd25a339eeec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: steel.001
+    second: {fileID: 2100000, guid: 4cfa3937aea13054391c4e5b0efb07ea, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
