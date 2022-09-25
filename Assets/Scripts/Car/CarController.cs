@@ -8,6 +8,8 @@ public class CarController : MonoBehaviour
     public WheelCollider[] colliders;
     public float speed, topSpeed, maneuveringSpeed;
 
+    public RGBSensorModule[] RGBsensor;
+
     Vector3 pos;
     Quaternion rot;
     
@@ -21,6 +23,37 @@ public class CarController : MonoBehaviour
     }
 
     void Update()
+    {
+        SetSpeed();
+
+        if (RGBsensor[0].reflection == 0)
+        {
+            Debug.Log("Line Right");
+            BrakeMotor(2,3);
+            FreeBrake(0,1);
+            AccelerateMotor(0,1);
+        }
+        else
+        {
+            FreeBrake(2,3);
+            AccelerateMotor(2,3);
+        }
+
+        if (RGBsensor[1].reflection == 0)
+        {
+            Debug.Log("Line Left");
+            BrakeMotor(0,1);
+            FreeBrake(2,3);
+            AccelerateMotor(2,3);
+        }
+        else
+        {
+            FreeBrake(0,1);
+            AccelerateMotor(0,1);
+        }
+    }
+
+    /*void Update()
     {   
         inputView = Input.GetAxis("Vertical");
         inputView2 = Input.GetAxis("Horizontal");
@@ -50,7 +83,7 @@ public class CarController : MonoBehaviour
         }
 
         SetWheelsPosition();
-    }
+    }*/
 
     void Forward()
     {
@@ -103,8 +136,15 @@ public class CarController : MonoBehaviour
 
     void AccelerateMotor(int wheel1, int wheel2)
     {
-        colliders[wheel1].motorTorque = torque * (-1) * inputView;
-        colliders[wheel2].motorTorque = torque * (-1) * inputView;
+        if (speed < topSpeed)
+        {
+            colliders[wheel1].motorTorque = torque * (-1);
+            colliders[wheel2].motorTorque = torque * (-1);
+        }
+        else 
+        {
+            NoAccelerate(wheel1, wheel2);
+        }
     }
 
     void NoAccelerate(int wheel1, int wheel2)
@@ -122,8 +162,8 @@ public class CarController : MonoBehaviour
 
     void BrakeMotor(int wheel1, int wheel2)
     {
-        colliders[wheel1].brakeTorque = torque/2;
-        colliders[wheel2].brakeTorque = torque/2;
+        colliders[wheel1].brakeTorque = torque * 5;
+        colliders[wheel2].brakeTorque = torque * 5; 
     }
 
     void FreeBrake(int wheel1, int wheel2)
