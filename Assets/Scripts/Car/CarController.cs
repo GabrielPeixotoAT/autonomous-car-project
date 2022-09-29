@@ -9,6 +9,7 @@ public class CarController : MonoBehaviour
     public float speed, topSpeed, maneuveringSpeed;
 
     public RGBSensorModule[] RGBsensor;
+    public UltrassonicSensor[] ultrassonicSensor;
 
     Vector3 pos;
     Quaternion rot;
@@ -26,30 +27,37 @@ public class CarController : MonoBehaviour
     {
         SetSpeed();
 
-        if (RGBsensor[0].reflection == 0)
+        if (ultrassonicSensor[0].value != 0)
         {
-            Debug.Log("Line Right");
-            BrakeMotor(2,3);
-            FreeBrake(0,1);
-            AccelerateMotor(0,1);
-        }
-        else
-        {
-            FreeBrake(2,3);
-            AccelerateMotor(2,3);
-        }
+            if (RGBsensor[0].reflection == 0)
+            {
+                Debug.Log("Line Right");
+                BrakeMotor(2,3);
+                FreeBrake(0,1);
+                AccelerateMotor(0,1);
+            }
+            else
+            {
+                FreeBrake(2,3);
+                AccelerateMotor(2,3);
+            }
 
-        if (RGBsensor[1].reflection == 0)
-        {
-            Debug.Log("Line Left");
-            BrakeMotor(0,1);
-            FreeBrake(2,3);
-            AccelerateMotor(2,3);
+            if (RGBsensor[1].reflection == 0)
+            {
+                Debug.Log("Line Left");
+                BrakeMotor(0,1);
+                FreeBrake(2,3);
+                AccelerateMotor(2,3);
+            }
+            else
+            {
+                FreeBrake(0,1);
+                AccelerateMotor(0,1);
+            }
         }
         else
         {
-            FreeBrake(0,1);
-            AccelerateMotor(0,1);
+            StopCar();
         }
     }
 
