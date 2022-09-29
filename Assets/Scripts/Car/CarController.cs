@@ -31,7 +31,6 @@ public class CarController : MonoBehaviour
         {
             if (RGBsensor[0].reflection == 0)
             {
-                Debug.Log("Line Right");
                 BrakeMotor(2,3);
                 FreeBrake(0,1);
                 AccelerateMotor(0,1);
@@ -44,7 +43,6 @@ public class CarController : MonoBehaviour
 
             if (RGBsensor[1].reflection == 0)
             {
-                Debug.Log("Line Left");
                 BrakeMotor(0,1);
                 FreeBrake(2,3);
                 AccelerateMotor(2,3);
@@ -60,38 +58,6 @@ public class CarController : MonoBehaviour
             StopCar();
         }
     }
-
-    /*void Update()
-    {   
-        inputView = Input.GetAxis("Vertical");
-        inputView2 = Input.GetAxis("Horizontal");
-
-        SetSpeed();
-
-        if (inputView != 0)
-        {
-            Forward();
-        }
-        else 
-        {
-            StopCar();
-        }
-
-        if (inputView2 > 0)
-        {
-            Turn(true);
-        }
-        else if (inputView2 < 0)
-        {
-            Turn(false);
-        }
-        else
-        {
-
-        }
-
-        SetWheelsPosition();
-    }*/
 
     void Forward()
     {
