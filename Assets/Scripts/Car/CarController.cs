@@ -107,7 +107,7 @@ public class CarController : MonoBehaviour
     void SetSpeed()
     {
         speed = 1.57f * colliders[0].rpm;
-        speed = Mathf.Abs(speed);
+        speed = speed * (-1);
     }
 
     void AccelerateMotor(int wheel1, int wheel2)
@@ -115,7 +115,7 @@ public class CarController : MonoBehaviour
         if (speed < topSpeed)
         {
             colliders[wheel1].motorTorque = torque * (-1);
-            //colliders[wheel2].motorTorque = torque * (-1);
+            colliders[wheel2].motorTorque = torque * (-1);
         }
         else 
         {
@@ -126,20 +126,35 @@ public class CarController : MonoBehaviour
     void NoAccelerate(int wheel1, int wheel2)
     {
         colliders[wheel1].motorTorque = 0;
-        //colliders[wheel2].motorTorque = 0;
+        colliders[wheel2].motorTorque = 0;
+    }
+
+    void NoAccelerateAll()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            colliders[i].motorTorque = 0;
+        }
     }
 
     void AccelerateMotorReverse(int wheel1, int wheel2)
     {
-        colliders[wheel1].motorTorque = torque;
-        //colliders[wheel2].motorTorque = torque;
+        if(speed > (topSpeed * (-1)))
+        {
+            colliders[wheel1].motorTorque = torque;
+            colliders[wheel2].motorTorque = torque;
+        }
+        else
+        {
+            NoAccelerateAll();
+        }
+        
     }
-
 
     void BrakeMotor(int wheel1, int wheel2)
     {
         colliders[wheel1].brakeTorque = torque * 5;
-        //colliders[wheel2].brakeTorque = torque * 5; 
+        colliders[wheel2].brakeTorque = torque * 5; 
     }
 
     void FreeBrake(int wheel1, int wheel2)
