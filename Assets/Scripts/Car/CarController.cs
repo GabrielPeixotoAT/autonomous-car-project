@@ -11,6 +11,12 @@ public class CarController : MonoBehaviour
     public RGBSensorModule[] RGBsensor;
     public UltrassonicSensor[] ultrassonicSensor;
 
+    public Material materialLeft, materialRight;
+
+    float arrowTime, arrowTimeToOff;
+    bool arrowOn, arrowNeeded;
+    char dir;
+
     Vector3 pos;
     Quaternion rot;
     
@@ -20,7 +26,6 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()
@@ -36,7 +41,7 @@ public class CarController : MonoBehaviour
                 FreeBrake(0,1);
                 AccelerateMotor(0,1);
             }
-            else
+            else if(RGBsensor[0].reflection == 10)
             {
                 FreeBrake(3,2);
                 AccelerateMotor(3,2);
@@ -49,10 +54,35 @@ public class CarController : MonoBehaviour
                 FreeBrake(3,2);
                 AccelerateMotor(3,2);
             }
-            else
+            else if(RGBsensor[1].reflection == 10)
             {
                 FreeBrake(0,1);
                 AccelerateMotor(0,1);
+            }
+
+            if(RGBsensor[0].reflection == 7)
+            {
+                arrowNeeded = true;
+                arrowTimeToOff = Time.time + 5.5f;
+                dir = 'R';
+            }
+            else if (RGBsensor[1].reflection == 7)
+            {
+                arrowNeeded = true;
+                arrowTimeToOff = Time.time + 5.5f;
+                dir = 'L';
+            }
+
+            if(arrowTimeToOff < Time.time)
+            {
+                arrowNeeded = false;
+            }
+
+            if (arrowTime < Time.time && arrowNeeded)
+            {
+                arrowTime = Time.time + 0.5f;
+                arrowOn = !arrowOn;
+                SetArrow(dir, arrowOn);
             }
         }
         else
@@ -93,6 +123,42 @@ public class CarController : MonoBehaviour
             colliders[1].motorTorque = torque;
             colliders[2].motorTorque = torque * (-1);
             colliders[3].motorTorque = torque * (-1);
+        }
+    }
+
+    void SetArrow(char dir, bool onOff)
+    {
+        if (onOff)
+        {
+            ArrowOn(dir);
+        }
+        else
+        {
+            ArrowOff(dir);
+        }
+    }
+
+    void ArrowOn(char direction)
+    {
+        if (direction == 'L')
+        {
+            materialLeft.EnableKeyword("_EMISSION");
+        }
+        else if(direction == 'R')
+        {
+            materialRight.EnableKeyword("_EMISSION");
+        }
+    }
+
+    void ArrowOff(char direction)
+    {
+        if (direction == 'L')
+        {
+            materialLeft.DisableKeyword("_EMISSION");
+        }
+        else if(direction == 'R')
+        {
+            materialRight.DisableKeyword("_EMISSION");
         }
     }
 

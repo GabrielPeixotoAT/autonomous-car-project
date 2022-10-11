@@ -10,10 +10,18 @@ public class RGBSensorModule : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-        if (Physics.Raycast(transform.position, Vector3.down, 1, layerMask))
+    {   
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1, layerMask))
         {
-            reflection = 0;
+            if(hit.collider.gameObject.tag == "ArrowLine")
+            {
+                reflection = 7;
+            }
+            else
+            {
+                reflection = 0;
+            }
         }
         else 
         {
