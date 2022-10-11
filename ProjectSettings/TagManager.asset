@@ -6,6 +6,7 @@ TagManager:
   tags:
   - refLine
   - ArrowLine
+  - CarryLine
   layers:
   - Default
   - TransparentFX

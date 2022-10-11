@@ -78,12 +78,13 @@ public class CarController : MonoBehaviour
                 arrowNeeded = false;
             }
 
-            if (arrowTime < Time.time && arrowNeeded)
+            if (arrowTime < Time.time && (arrowNeeded || arrowOn))
             {
                 arrowTime = Time.time + 0.5f;
                 arrowOn = !arrowOn;
                 SetArrow(dir, arrowOn);
             }
+            
         }
         else
         {
