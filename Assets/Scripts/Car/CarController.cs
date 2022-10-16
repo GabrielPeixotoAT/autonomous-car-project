@@ -13,9 +13,12 @@ public class CarController : MonoBehaviour
 
     public Material materialLeft, materialRight;
 
+    public Animator platformAnimator;
+
     float arrowTime, arrowTimeToOff;
-    bool arrowOn, arrowNeeded;
+    bool arrowOn, arrowNeeded, inManeuver;
     char dir;
+    int maneuverState, maneuverIndex;
 
     Vector3 pos;
     Quaternion rot;
@@ -26,11 +29,13 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        maneuverState = 0;
+        maneuverIndex = 0;
     }
 
     void Update()
     {
-        if (ultrassonicSensor[0].value != 0)
+        if (ultrassonicSensor[0].value != 0 && !inManeuver)
         {
             if (RGBsensor[0].reflection == 0)
             {
@@ -38,7 +43,6 @@ public class CarController : MonoBehaviour
                 AccelerateMotorReverse(3,2);
                 FreeBrake(0,1);
                 AccelerateMotor(0,1);
-                Debug.Log("Turn Right");
             }
             else if(RGBsensor[0].reflection == 10)
             {
@@ -47,6 +51,8 @@ public class CarController : MonoBehaviour
             }
             else if (RGBsensor[0].reflection == 5)
             {
+                maneuverIndex = 1;
+                inManeuver = true;
                 StopCar();
             }
 
@@ -56,7 +62,6 @@ public class CarController : MonoBehaviour
                 AccelerateMotorReverse(0,1);
                 FreeBrake(3,2);
                 AccelerateMotor(3,2);
-                Debug.Log("Turn Left");
             }
             else if (RGBsensor[1].reflection == 10)
             {
@@ -65,6 +70,8 @@ public class CarController : MonoBehaviour
             }
             else if (RGBsensor[1].reflection == 5)
             {
+                maneuverIndex = 1;
+                inManeuver = true;
                 StopCar();
             }
 
@@ -93,6 +100,10 @@ public class CarController : MonoBehaviour
                 SetArrow(dir, arrowOn);
             }
             
+        }
+        else if (inManeuver)
+        {
+            ManeuverManager(maneuverIndex);
         }
         else
         {
@@ -225,7 +236,6 @@ public class CarController : MonoBehaviour
         {
             NoAccelerateAll();
         }
-        
     }
 
     void BrakeMotor(int wheel1, int wheel2)
@@ -256,5 +266,50 @@ public class CarController : MonoBehaviour
             wheels[i].transform.position = pos;
             wheels[i].transform.rotation = rot;
         }
+    }
+
+    void ManeuverManager(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                PickUpLoad();
+                break;
+        }
+    }
+
+    public void ManeuverStateIncrement()
+    {
+        maneuverState++;
+    }
+
+    //Pick up load
+    void PickUpLoad()
+    {
+        if (maneuverState == 0)
+        {
+            GearUp(platformAnimator);
+        }
+        else if (maneuverState == 1)
+        {
+            HalfTurn();
+        }
+    }
+
+    void GearUp(Animator animator)
+    {
+        Debug.Log("UP!");
+        animator.SetInteger("state", 1);
+    }
+
+    void HalfTurn()
+    {
+        AccelerateMotor(0,1);
+        AccelerateMotorReverse(3,2);
+    }
+
+    void GearDown(Animator animator)
+    {
+        animator.SetInteger("state", 2);
     }
 }
