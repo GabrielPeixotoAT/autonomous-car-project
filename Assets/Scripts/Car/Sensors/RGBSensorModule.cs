@@ -14,9 +14,13 @@ public class RGBSensorModule : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1, layerMask))
         {
-            if(hit.collider.gameObject.tag == "ArrowLine")
+            if (hit.collider.gameObject.tag == "ArrowLine")
             {
                 reflection = 7;
+            }
+            else if (hit.collider.gameObject.tag == "CarryLine")
+            {
+                reflection = 5;
             }
             else
             {

@@ -30,8 +30,6 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        SetSpeed();
-
         if (ultrassonicSensor[0].value != 0)
         {
             if (RGBsensor[0].reflection == 0)
@@ -40,11 +38,16 @@ public class CarController : MonoBehaviour
                 AccelerateMotorReverse(3,2);
                 FreeBrake(0,1);
                 AccelerateMotor(0,1);
+                Debug.Log("Turn Right");
             }
             else if(RGBsensor[0].reflection == 10)
             {
                 FreeBrake(3,2);
                 AccelerateMotor(3,2);
+            }
+            else if (RGBsensor[0].reflection == 5)
+            {
+                StopCar();
             }
 
             if (RGBsensor[1].reflection == 0)
@@ -53,11 +56,16 @@ public class CarController : MonoBehaviour
                 AccelerateMotorReverse(0,1);
                 FreeBrake(3,2);
                 AccelerateMotor(3,2);
+                Debug.Log("Turn Left");
             }
-            else if(RGBsensor[1].reflection == 10)
+            else if (RGBsensor[1].reflection == 10)
             {
                 FreeBrake(0,1);
                 AccelerateMotor(0,1);
+            }
+            else if (RGBsensor[1].reflection == 5)
+            {
+                StopCar();
             }
 
             if(RGBsensor[0].reflection == 7)
@@ -73,7 +81,7 @@ public class CarController : MonoBehaviour
                 dir = 'L';
             }
 
-            if(arrowTimeToOff < Time.time)
+            if (arrowTimeToOff < Time.time)
             {
                 arrowNeeded = false;
             }
@@ -94,7 +102,7 @@ public class CarController : MonoBehaviour
 
     void Forward()
     {
-        if (speed < topSpeed)
+        if (speed < topSpeed && speed > (topSpeed * (-1)))
         {
             FreeBrakeAll();
             AccelerateMotor(0,1);
@@ -171,14 +179,16 @@ public class CarController : MonoBehaviour
         }
     }
 
-    void SetSpeed()
+    void SetSpeed(int index)
     {
-        speed = 1.57f * colliders[0].rpm;
+        speed = 1.57f * colliders[index].rpm;
         speed = speed * (-1);
     }
 
     void AccelerateMotor(int wheel1, int wheel2)
     {
+        SetSpeed(wheel1);
+
         if (speed < topSpeed)
         {
             colliders[wheel1].motorTorque = torque * (-1);
