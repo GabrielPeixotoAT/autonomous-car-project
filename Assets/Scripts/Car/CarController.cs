@@ -15,7 +15,8 @@ public class CarController : MonoBehaviour
 
     public Animator platformAnimator;
 
-    float arrowTime, arrowTimeToOff;
+    bool forAuxTime;
+    float arrowTime, arrowTimeToOff, upTime, turnTime;
     bool arrowOn, arrowNeeded, inManeuver;
     char dir;
     int maneuverState, maneuverIndex;
@@ -275,6 +276,9 @@ public class CarController : MonoBehaviour
             case 1:
                 PickUpLoad();
                 break;
+            case 2:
+                
+                break;
         }
     }
 
@@ -288,11 +292,37 @@ public class CarController : MonoBehaviour
     {
         if (maneuverState == 0)
         {
+            if (!forAuxTime)
+            {
+                upTime = Time.time + 1.5f;
+                forAuxTime = true;
+            }
             GearUp(platformAnimator);
+            if (upTime < Time.time)
+            {
+                ManeuverStateIncrement();
+                forAuxTime = false;
+            }
         }
         else if (maneuverState == 1)
         {
-            HalfTurn();
+            if (!forAuxTime)
+            {
+                turnTime = Time.time + 2.1f;
+                forAuxTime = true;
+            }
+
+            if (turnTime > Time.time)
+            {
+                FreeBrakeAll();
+                HalfTurn();
+            }
+            else 
+            {
+
+                StopCar();
+            }
+            
         }
     }
 
