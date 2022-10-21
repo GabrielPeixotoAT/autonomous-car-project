@@ -29,6 +29,8 @@ public class CarController : MonoBehaviour
 
     public float torque;
 
+    public UIConsole console;
+
     void Start()
     {
         maneuverState = 0;
@@ -160,6 +162,7 @@ public class CarController : MonoBehaviour
         if (onOff)
         {
             ArrowOn(dir);
+            console.WriteMessage("Arrow " + dir.ToString(), new TypeInfo());
         }
         else
         {
