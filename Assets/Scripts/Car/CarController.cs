@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public bool vehicleIsOn;
     public GameObject[] wheels;
     public WheelCollider[] colliders;
     public float speed, topSpeed, maneuveringSpeed;
@@ -36,79 +37,86 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        if (ultrassonicSensor[0].value != 0 && !inManeuver)
-        {
-            if (RGBsensor[0].reflection == 0)
-            {
-                //BrakeMotor(3,2);
-                AccelerateMotorReverse(3,2);
-                FreeBrake(0,1);
-                AccelerateMotor(0,1);
-            }
-            else if(RGBsensor[0].reflection == 10)
-            {
-                FreeBrake(3,2);
-                AccelerateMotor(3,2);
-            }
-            else if (RGBsensor[0].reflection == 5)
-            {
-                maneuverIndex = 1;
-                inManeuver = true;
-                StopCar();
-            }
-
-            if (RGBsensor[1].reflection == 0)
-            {
-                //BrakeMotor(0,1);
-                AccelerateMotorReverse(0,1);
-                FreeBrake(3,2);
-                AccelerateMotor(3,2);
-            }
-            else if (RGBsensor[1].reflection == 10)
-            {
-                FreeBrake(0,1);
-                AccelerateMotor(0,1);
-            }
-            else if (RGBsensor[1].reflection == 5)
-            {
-                maneuverIndex = 1;
-                inManeuver = true;
-                StopCar();
-            }
-
-            if(RGBsensor[0].reflection == 7)
-            {
-                arrowNeeded = true;
-                arrowTimeToOff = Time.time + 5.5f;
-                dir = 'R';
-            }
-            else if (RGBsensor[1].reflection == 7)
-            {
-                arrowNeeded = true;
-                arrowTimeToOff = Time.time + 5.5f;
-                dir = 'L';
-            }
-
-            if (arrowTimeToOff < Time.time)
-            {
-                arrowNeeded = false;
-            }
-
-            if (arrowTime < Time.time && (arrowNeeded || arrowOn))
-            {
-                arrowTime = Time.time + 0.5f;
-                arrowOn = !arrowOn;
-                SetArrow(dir, arrowOn);
-            }
-            
-        }
-        else if (inManeuver)
-        {
-            ManeuverManager(maneuverIndex);
-        }
-        else
+        if (!vehicleIsOn)
         {
             StopCar();
+        }
+
+        else
+        {
+            if (ultrassonicSensor[0].value != 0 && !inManeuver)
+            {
+                if (RGBsensor[0].reflection == 0)
+                {
+                    //BrakeMotor(3,2);
+                    AccelerateMotorReverse(3,2);
+                    FreeBrake(0,1);
+                    AccelerateMotor(0,1);
+                }
+                else if(RGBsensor[0].reflection == 10)
+                {
+                    FreeBrake(3,2);
+                    AccelerateMotor(3,2);
+                }
+                else if (RGBsensor[0].reflection == 5)
+                {
+                    maneuverIndex = 1;
+                    inManeuver = true;
+                    StopCar();
+                }
+
+                if (RGBsensor[1].reflection == 0)
+                {
+                    //BrakeMotor(0,1);
+                    AccelerateMotorReverse(0,1);
+                    FreeBrake(3,2);
+                    AccelerateMotor(3,2);
+                }
+                else if (RGBsensor[1].reflection == 10)
+                {
+                    FreeBrake(0,1);
+                    AccelerateMotor(0,1);
+                }
+                else if (RGBsensor[1].reflection == 5)
+                {
+                    maneuverIndex = 1;
+                    inManeuver = true;
+                    StopCar();
+                }
+
+                if(RGBsensor[0].reflection == 7)
+                {
+                    arrowNeeded = true;
+                    arrowTimeToOff = Time.time + 5.5f;
+                    dir = 'R';
+                }
+                else if (RGBsensor[1].reflection == 7)
+                {
+                    arrowNeeded = true;
+                    arrowTimeToOff = Time.time + 5.5f;
+                    dir = 'L';
+                }
+
+                if (arrowTimeToOff < Time.time)
+                {
+                    arrowNeeded = false;
+                }
+
+                if (arrowTime < Time.time && (arrowNeeded || arrowOn))
+                {
+                    arrowTime = Time.time + 0.5f;
+                    arrowOn = !arrowOn;
+                    SetArrow(dir, arrowOn);
+                }
+            }
+            else if (inManeuver)
+            {
+                ManeuverManager(maneuverIndex);
+            }
+            else
+            {
+                StopCar();
+            }
         }
     }
 
@@ -341,5 +349,10 @@ public class CarController : MonoBehaviour
     void GearDown(Animator animator)
     {
         animator.SetInteger("state", 2);
+    }
+
+    public void PublicStopCar()
+    {
+        StopCar();
     }
 }
