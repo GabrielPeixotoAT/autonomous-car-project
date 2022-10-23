@@ -16,7 +16,7 @@ public class CarController : MonoBehaviour
 
     public Animator platformAnimator;
 
-    bool forAuxTime;
+    bool forAuxTime, isStoped;
     float arrowTime, arrowTimeToOff, upTime, turnTime;
     bool arrowOn, arrowNeeded, inManeuver;
     char dir;
@@ -41,7 +41,10 @@ public class CarController : MonoBehaviour
     {
         if (!vehicleIsOn)
         {
-            StopCar();
+            if (!isStoped)
+            {
+                StopCar();
+            }
         }
 
         else
@@ -117,7 +120,10 @@ public class CarController : MonoBehaviour
             }
             else
             {
-                StopCar();
+                if (!isStoped)
+                {
+                    StopCar();
+                }
             }
         }
     }
@@ -196,6 +202,9 @@ public class CarController : MonoBehaviour
 
     void StopCar()
     {
+        isStoped = true;
+        console.WriteMessage("Vehicle Stop!", new TypeWarning());
+
         for (int i = 0; i < 4; i++)
         {
             colliders[i].brakeTorque = torque * 2;
@@ -211,6 +220,7 @@ public class CarController : MonoBehaviour
     void AccelerateMotor(int wheel1, int wheel2)
     {
         SetSpeed(wheel1);
+        isStoped = false;
 
         if (speed < topSpeed)
         {
@@ -239,6 +249,8 @@ public class CarController : MonoBehaviour
 
     void AccelerateMotorReverse(int wheel1, int wheel2)
     {
+        isStoped = false;
+
         if(speed > (topSpeed * (-1)))
         {
             colliders[wheel1].motorTorque = torque;
