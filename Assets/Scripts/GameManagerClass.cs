@@ -10,6 +10,10 @@ public class GameManagerClass : MonoBehaviour
 
     GameObject pauseMenuClone;
 
+    void Start() {
+        Time.timeScale = 1;
+    }
+
     void Update()
     {
         VerifyPauseAction();
