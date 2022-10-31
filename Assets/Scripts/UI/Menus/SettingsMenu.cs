@@ -41,6 +41,8 @@ public class SettingsMenu : MonoBehaviour
         {
             fullScreenInput.value = 1;
         }
+
+        qualityInput.value = QualitySettings.GetQualityLevel();
     }
 
     public void SetScreenResolution(int index)
