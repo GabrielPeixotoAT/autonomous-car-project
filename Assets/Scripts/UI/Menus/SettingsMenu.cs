@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    bool fullScreen = true;
+    bool fullScreen;
     
     int current;
 
@@ -13,8 +13,10 @@ public class SettingsMenu : MonoBehaviour
 
     void Start()
     {
+        fullScreen = Screen.fullScreen;
+
         current = Screen.width;
-        
+
         switch (current)
         {
             case 800:
@@ -29,6 +31,15 @@ public class SettingsMenu : MonoBehaviour
             case 1920:
                 resolutionInput.value = 3;
                 break;
+        }
+
+        if (fullScreen)
+        {
+            fullScreenInput.value = 0;
+        }
+        else
+        {
+            fullScreenInput.value = 1;
         }
     }
 
@@ -53,7 +64,14 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetFullScreen()
     {
-        fullScreen = !fullScreen;
+        if (fullScreenInput.value == 0)
+        {
+            fullScreen = true;
+        }
+       else
+       {
+            fullScreen = false;
+       }
         Screen.fullScreen = fullScreen;
     }
 
