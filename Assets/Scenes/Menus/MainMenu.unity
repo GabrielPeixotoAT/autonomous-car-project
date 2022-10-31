@@ -1437,7 +1437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: " 2022 - Theropod Studios\n Version: 0.3.25\n Last Update: 30/10/2022"
+  m_Text: " 2022 - Theropod Studios\n Version: 0.3.26\n Last Update: 30/10/2022"
 --- !u!222 &1629181551
 CanvasRenderer:
   m_ObjectHideFlags: 0
