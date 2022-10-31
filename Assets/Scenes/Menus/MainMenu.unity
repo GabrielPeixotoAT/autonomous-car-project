@@ -1083,7 +1083,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320138867}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 57acc7e0158d7e72fa78fd2592ffdd3c, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: f8f80aaf9d8a52ca7b31023b6c5b4174, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1437,7 +1437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: " 2022 - Theropod Studios\n Version: 0.3.26\n Last Update: 30/10/2022"
+  m_Text: " 2022 - Theropod Studios\n Version: 0.3.27\n Last Update: 30/10/2022"
 --- !u!222 &1629181551
 CanvasRenderer:
   m_ObjectHideFlags: 0
