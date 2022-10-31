@@ -2475,6 +2475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0e2f35afdba299da11c52311ea5ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolutionInput: {fileID: 8084847644540229904}
+  fullScreenInput: {fileID: 8084847642782977601}
+  qualityInput: {fileID: 8084847642782422259}
+  text: {fileID: 0}
 --- !u!1 &8084847644131000393
 GameObject:
   m_ObjectHideFlags: 0
