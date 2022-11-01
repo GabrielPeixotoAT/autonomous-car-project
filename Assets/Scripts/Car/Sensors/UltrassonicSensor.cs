@@ -12,10 +12,13 @@ public class UltrassonicSensor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        RaycastHit hit;
+
         Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward);
-        if (Physics.Raycast(this.transform.position, this.transform.forward, distance, layerMask))
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, distance, layerMask))
         {
-            value = 0;
+            Debug.DrawRay(this.transform.position, this.transform.forward * distance, Color.white);
+            value = hit.distance;
         }
         else 
         {

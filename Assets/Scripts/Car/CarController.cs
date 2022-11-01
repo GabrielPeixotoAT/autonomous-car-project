@@ -17,7 +17,7 @@ public class CarController : MonoBehaviour
     public Animator platformAnimator;
 
     bool forAuxTime, isStoped;
-    float arrowTime, arrowTimeToOff, upTime, turnTime;
+    float arrowTime, arrowTimeToOff, upTime, turnTime, perSecondTime;
     bool arrowOn, arrowNeeded, inManeuver;
     char dir;
     int maneuverState, maneuverIndex;
@@ -39,6 +39,12 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
+        if (Time.time > perSecondTime)
+        {
+            perSecondTime = Time.time + 1;
+            PerSecond();
+        }
+
         if (!vehicleIsOn)
         {
             if (!isStoped)
@@ -46,12 +52,23 @@ public class CarController : MonoBehaviour
                 StopCar();
             }
         }
-
         else
         {
-            if (ultrassonicSensor[0].value != 0 && !inManeuver)
+            if (ultrassonicSensor[0].value > 1 && !inManeuver)
             {
-                if (RGBsensor[0].reflection == 0)
+                if (ultrassonicSensor[1].value < 0.3f)
+                {
+                    AccelerateMotorReverse(0,1);
+                    FreeBrake(3,2);
+                    AccelerateMotor(3,2);
+                }
+                else if (ultrassonicSensor[2].value < 0.3f)
+                {
+                    AccelerateMotorReverse(3,2);
+                    FreeBrake(0,1);
+                    AccelerateMotor(0,1);
+                }
+                else if (RGBsensor[0].reflection == 0)
                 {
                     //BrakeMotor(3,2);
                     AccelerateMotorReverse(3,2);
@@ -126,6 +143,11 @@ public class CarController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void PerSecond()
+    {
+        console.WriteMessage("Distance: " + ultrassonicSensor[0].value.ToString(), new TypeInfo());
     }
 
     void Forward()
@@ -251,6 +273,8 @@ public class CarController : MonoBehaviour
     {
         isStoped = false;
 
+        SetSpeed(wheel1);
+
         if(speed > (topSpeed * (-1)))
         {
             colliders[wheel1].motorTorque = torque;
@@ -258,7 +282,7 @@ public class CarController : MonoBehaviour
         }
         else
         {
-            NoAccelerateAll();
+            NoAccelerate(wheel1, wheel2);
         }
     }
 
@@ -319,8 +343,8 @@ public class CarController : MonoBehaviour
             {
                 upTime = Time.time + 1.5f;
                 forAuxTime = true;
+                GearUp(platformAnimator);
             }
-            GearUp(platformAnimator);
             if (upTime < Time.time)
             {
                 ManeuverStateIncrement();
@@ -331,7 +355,7 @@ public class CarController : MonoBehaviour
         {
             if (!forAuxTime)
             {
-                turnTime = Time.time + 2.1f;
+                turnTime = Time.time + 4.1f;
                 forAuxTime = true;
             }
 
@@ -342,8 +366,11 @@ public class CarController : MonoBehaviour
             }
             else 
             {
-
-                StopCar();
+                if (inManeuver)
+                {
+                    StopCar();
+                    inManeuver = false;
+                }
             }
             
         }
@@ -351,7 +378,7 @@ public class CarController : MonoBehaviour
 
     void GearUp(Animator animator)
     {
-        Debug.Log("UP!");
+        console.WriteMessage("Platform Up", new TypeInfo());
         animator.SetInteger("state", 1);
     }
 
@@ -363,6 +390,7 @@ public class CarController : MonoBehaviour
 
     void GearDown(Animator animator)
     {
+        console.WriteMessage("Platform Down", new TypeInfo());
         animator.SetInteger("state", 2);
     }
 
