@@ -16,7 +16,7 @@ public class CarController : MonoBehaviour
 
     public Animator platformAnimator;
 
-    bool forAuxTime, isStoped;
+    bool forAuxTime, isStoped, isSoundPlay;
     float arrowTime, arrowTimeToOff, upTime, turnTime, perSecondTime;
     bool arrowOn, arrowNeeded, inManeuver;
     char dir;
@@ -37,7 +37,7 @@ public class CarController : MonoBehaviour
         maneuverIndex = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Time.time > perSecondTime)
         {
@@ -225,6 +225,9 @@ public class CarController : MonoBehaviour
     void StopCar()
     {
         isStoped = true;
+
+        PlaySound(false);
+        
         console.WriteMessage("Vehicle Stop!", new TypeWarning());
 
         for (int i = 0; i < 4; i++)
@@ -241,9 +244,12 @@ public class CarController : MonoBehaviour
 
     void AccelerateMotor(int wheel1, int wheel2)
     {
-        SetSpeed(wheel1);
         isStoped = false;
 
+        PlaySound(true);
+
+        SetSpeed(wheel1);
+        
         if (speed < topSpeed)
         {
             colliders[wheel1].motorTorque = torque * (-1);
@@ -272,6 +278,8 @@ public class CarController : MonoBehaviour
     void AccelerateMotorReverse(int wheel1, int wheel2)
     {
         isStoped = false;
+
+        PlaySound(true);
 
         SetSpeed(wheel1);
 
@@ -392,6 +400,20 @@ public class CarController : MonoBehaviour
     {
         console.WriteMessage("Platform Down", new TypeInfo());
         animator.SetInteger("state", 2);
+    }
+
+    void PlaySound(bool play)
+    {
+        if (!isSoundPlay && play)
+        {
+            isSoundPlay = true;
+            gameObject.GetComponent<AudioSource>().Play();
+        }
+        else if (isSoundPlay && !play)
+        {
+            isSoundPlay = false;
+            gameObject.GetComponent<AudioSource>().Stop();
+        }
     }
 
     public void PublicStopCar()
