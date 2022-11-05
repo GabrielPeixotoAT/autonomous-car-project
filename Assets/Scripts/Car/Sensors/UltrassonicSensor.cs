@@ -15,6 +15,7 @@ public class UltrassonicSensor : MonoBehaviour
         RaycastHit hit;
 
         Debug.DrawLine(this.transform.position, this.transform.position + this.transform.forward);
+        
         if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, distance, layerMask))
         {
             Debug.DrawRay(this.transform.position, this.transform.forward * distance, Color.white);
