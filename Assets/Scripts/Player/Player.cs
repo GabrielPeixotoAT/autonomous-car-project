@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 
     public Animator CrosshairAnimator;
 
+    public bool InInteractArea;
+    GameObject InteractAreaFunction;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,18 +22,33 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckKeys();
         UpdateCross();
+    }
+
+    void CheckKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && InInteractArea)
+        {
+            InteractAreaFunction.GetComponent<InteractFunction>().Execute();
+        }
     }
 
     void UpdateCross()
     {
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, distance, layerMask))
+        RaycastHit hit;
+
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, distance, layerMask))
         {
             CrosshairAnimator.SetBool("Interact", true);
+            InInteractArea = true;
+            InteractAreaFunction = hit.transform.gameObject;
         }
         else 
         {
             CrosshairAnimator.SetBool("Interact", false);
+            InInteractArea = false;
+            InteractAreaFunction = null;
         }
     }
 }

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class MainGate : MonoBehaviour, InteractFunction
 {
-    public Animator anim;
+    public Animator AnimatorGate, AnimatorButton;
 
-    bool isOpen;
+    public bool IsActive;
 
     public void Execute()
-    {
-        isOpen = !isOpen;
-        anim.SetBool("Open", isOpen);
+    {   
+        IsActive = !IsActive;
+        AnimatorGate.SetBool("Open", IsActive);
+        AnimatorButton.SetTrigger("Press");
     }
 }
