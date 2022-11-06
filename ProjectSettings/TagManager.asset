@@ -7,6 +7,7 @@ TagManager:
   - refLine
   - ArrowLine
   - CarryLine
+  - DeliveryLine
   layers:
   - Default
   - TransparentFX
