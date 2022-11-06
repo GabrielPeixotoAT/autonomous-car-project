@@ -5,7 +5,6 @@ using TMPro;
 
 public class Batery : MonoBehaviour
 {
-    public TMP_Text bateryText;
     public float charge, timeToDegrase;
 
     bool isRecharging, vehicleIsOn;
@@ -23,8 +22,6 @@ public class Batery : MonoBehaviour
         {
             TurnOff();
         }
-
-        UpdateText();
 
         BateryUse(vehicleIsOn);
     }
@@ -72,21 +69,5 @@ public class Batery : MonoBehaviour
     {
         vehicleIsOn = false;
         gameObject.GetComponent<CarController>().vehicleIsOn = false;
-    }
-
-    void UpdateText()
-    {
-        if (charge < 10)
-        {
-            bateryText.color = Color.red;
-        } else if (charge < 20)
-        {
-            bateryText.color = Color.yellow;
-        } else 
-        {
-            bateryText.color = Color.white;
-        }
-
-        bateryText.text = "Batery: " + charge.ToString("0.0") + "%";
     }
 }

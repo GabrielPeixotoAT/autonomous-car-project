@@ -25,6 +25,17 @@ public class VehicleHUD : MonoBehaviour
 
     void UpdateTexts()
     {
+        if (Batery < 10)
+        {
+            TextBatery.color = Color.red;
+        } else if (Batery < 20)
+        {
+            TextBatery.color = Color.yellow;
+        } else 
+        {
+            TextBatery.color = Color.green;
+        }
+        
         TextBatery.text = "Batery: " + Batery.ToString("F1") + "%";
         
         switch (Status_)
@@ -32,6 +43,5 @@ public class VehicleHUD : MonoBehaviour
             case Status.Runing: TextStatus.text = "Runing"; break;
             case Status.Stoped: TextStatus.text = "Stoped"; break;
         }
-        
     }
 }
