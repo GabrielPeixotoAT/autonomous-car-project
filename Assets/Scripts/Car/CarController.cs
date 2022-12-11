@@ -42,7 +42,7 @@ public class CarController : MonoBehaviour
         if (Time.time > perSecondTime)
         {
             perSecondTime = Time.time + 1;
-            PerSecond();
+            //PerSecond();
         }
 
         if (!vehicleIsOn)
