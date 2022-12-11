@@ -13,7 +13,7 @@ public class VehicleHUD : MonoBehaviour
 
     public Text TextName, TextBatery, TextStatus;
 
-    void Start()
+    void LateStart()
     {
         TextName.text = "Name: " + Name;
     }

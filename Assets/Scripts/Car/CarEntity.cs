@@ -25,7 +25,7 @@ public class CarEntity : MonoBehaviour
         }
         else
         {
-            VehicleHud.Status_ = Status.Stoped;
+            VehicleHud.Status_ = Status.Stoped; 
         }
     }
 }
