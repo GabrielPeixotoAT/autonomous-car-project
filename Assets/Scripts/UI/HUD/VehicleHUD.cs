@@ -40,8 +40,8 @@ public class VehicleHUD : MonoBehaviour
         
         switch (Status_)
         {
-            case Status.Runing: TextStatus.text = "Runing"; break;
-            case Status.Stoped: TextStatus.text = "Stoped"; break;
+            case Status.Runing: TextStatus.text = "Status: Runing"; break;
+            case Status.Stoped: TextStatus.text = "Status: Stoped"; break;
         }
     }
 }

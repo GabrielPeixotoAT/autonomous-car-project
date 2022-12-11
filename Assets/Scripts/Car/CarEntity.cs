@@ -19,5 +19,13 @@ public class CarEntity : MonoBehaviour
     void Update()
     {
         VehicleHud.Batery = BateryClass.charge;
+        if (gameObject.GetComponent<CarController>().vehicleIsOn)
+        {
+            VehicleHud.Status_ = Status.Runing;
+        }
+        else
+        {
+            VehicleHud.Status_ = Status.Stoped;
+        }
     }
 }
