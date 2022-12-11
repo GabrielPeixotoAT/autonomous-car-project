@@ -15,7 +15,7 @@ public class VehicleHUD : MonoBehaviour
 
     void LateStart()
     {
-        TextName.text = "Name: " + Name;
+        TextName.text = "ID: " + Name;
     }
 
     void Update()
