@@ -13,11 +13,6 @@ public class VehicleHUD : MonoBehaviour
 
     public Text TextName, TextBatery, TextStatus;
 
-    void LateStart()
-    {
-        TextName.text = "ID: " + Name;
-    }
-
     void Update()
     {
         UpdateTexts();
@@ -37,7 +32,8 @@ public class VehicleHUD : MonoBehaviour
         }
         
         TextBatery.text = "Batery: " + Batery.ToString("F1") + "%";
-        
+        TextName.text = "ID: " + Name;
+
         switch (Status_)
         {
             case Status.Runing: TextStatus.text = "Status: Runing"; break;
